@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Huddle</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <main id="join" class="screen">
+    <h1 class="logo">Huddle</h1>
+    <p class="lead">Your phone is the Fire TV's camera.</p>
+    <form id="joinForm">
+      <label>Room code <input id="code" name="code" maxlength="4" autocapitalize="characters" autocomplete="off" required pattern="[A-Za-z0-9]{4}" /></label>
+      <label>Your name <input id="name" name="name" maxlength="16" placeholder="Player" autocomplete="nickname" /></label>
+      <fieldset><legend>Shooting hand</legend>
+        <label class="chip"><input type="radio" name="hand" value="right" checked /> Right</label>
+        <label class="chip"><input type="radio" name="hand" value="left" /> Left</label>
+      </fieldset>
+      <fieldset><legend>Camera</legend>
+        <label class="chip"><input type="radio" name="cam" value="user" checked /> Front</label>
+        <label class="chip"><input type="radio" name="cam" value="environment" /> Back</label>
+      </fieldset>
+      <button type="submit" class="big">Join</button>
+    </form>
+    <p class="privacy">🔒 Video never leaves your phone. Only 33 skeleton points are sent to the TV.</p>
+  </main>
+
+  <main id="error" class="screen" hidden role="alert">
+    <h1>Hmm.</h1>
+    <p id="errorText"></p>
+    <button class="big" onclick="location.reload()">Try again</button>
+  </main>
+
+  <main id="stage" class="screen" hidden>
+    <div id="preview">
+      <video id="video" playsinline muted></video>
+      <canvas id="overlay"></canvas>
+      <div id="calib" class="calib" aria-live="polite">Step back until your whole body is in frame</div>
+    </div>
+    <section id="hud">
+      <div class="who"><span id="swatch" class="swatch"></span><strong id="who">Player</strong><span id="dot" class="dot" title="connection" aria-label="connected"></span></div>
+      <div id="status" aria-live="polite">Waiting for the host…</div>
+      <div id="feedback" aria-live="polite"></div>
+      <div class="row">
+        <button id="togglePreview">Hide preview</button>
+        <button id="record" hidden>● Record</button>
+      </div>
+      <p class="hint">Prop your phone at waist height, about 2.5 m away.</p>
+      <div id="debug" hidden></div>
+    </section>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
