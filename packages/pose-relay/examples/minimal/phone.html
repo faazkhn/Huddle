@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>pose-relay phone</title>
+<body style="font:20px system-ui;padding:16px">
+<button id="go" style="font-size:24px;padding:16px">Start camera</button>
+<p id="s">Only keypoints are sent — video stays on this phone.</p>
+<video id="v" playsinline muted style="width:100%"></video>
+<script type="module">
+  import { FilesetResolver, PoseLandmarker } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/+esm";
+  const code = location.pathname.split("/")[2];
+  go.onclick = async () => {
+    v.srcObject = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } }); await v.play();
+    const files = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm");
+    const pose = await PoseLandmarker.createFromOptions(files, { baseOptions: { modelAssetPath: "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task" }, runningMode: "VIDEO" });
+    const ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws`);
+    ws.onopen = () => ws.send(JSON.stringify({ type: "join", code }));
+    ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.type === "ping") ws.send(JSON.stringify({ type: "pong" })); if (m.type === "joined") s.textContent = `Joined as player ${m.slot + 1}`; };
+    setInterval(() => {
+      const p = pose.detectForVideo(v, performance.now()).landmarks[0];
+      const ar = v.videoWidth / v.videoHeight;
+      if (p && ws.readyState === 1) ws.send(JSON.stringify({ type: "pose", t: Date.now(), lm: p.flatMap((l) => [0.5 + (0.5 - l.x) * ar, l.y, l.visibility]) }));
+    }, 66);
+  };
+</script>

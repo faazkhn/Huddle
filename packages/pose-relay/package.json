@@ -1,0 +1,14 @@
+{
+  "name": "pose-relay",
+  "version": "0.1.0",
+  "description": "Turn phones into body-pose cameras for a big screen: MediaPipe on the phone, keypoints-only WebSocket rooms on the server.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./server": "./src/server.ts",
+    "./phone": "./src/phone.ts"
+  },
+  "keywords": ["pose", "mediapipe", "fire-tv", "websocket", "second-screen", "fitness"],
+  "peerDependencies": { "@mediapipe/tasks-vision": ">=0.10" },
+  "peerDependenciesMeta": { "@mediapipe/tasks-vision": { "optional": true } }
+}

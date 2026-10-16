@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8" /><title>pose-relay screen</title>
+<body style="margin:0;background:#111;color:#eee;font:24px system-ui">
+<p id="info" style="position:fixed;left:16px;top:8px">connecting…</p>
+<canvas id="c" style="width:100vw;height:100vh"></canvas>
+<script type="module">
+  const bones = [[11,12],[11,23],[12,24],[23,24],[11,13],[13,15],[12,14],[14,16],[23,25],[25,27],[24,26],[26,28]];
+  const poses = new Map(), c = document.getElementById("c"), g = c.getContext("2d");
+  const ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws`);
+  ws.onopen = () => ws.send(JSON.stringify({ type: "tv_hello" }));
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.type === "room_created") info.textContent = `Open ${m.joinUrl} on a phone`;
+    if (m.type === "pose") poses.set(m.playerId, m.lm);
+    if (m.type === "player_left") poses.delete(m.playerId);
+    if (m.type === "ping") ws.send(JSON.stringify({ type: "pong" }));
+  };
+  (function draw() {
+    c.width = innerWidth; c.height = innerHeight; let i = 0;
+    for (const lm of poses.values()) {
+      const ox = (++i - 0.5) * c.width / (poses.size || 1) - c.height / 2, X = (k) => ox + lm[k * 3] * c.height, Y = (k) => lm[k * 3 + 1] * c.height;
+      g.strokeStyle = `hsl(${i * 90} 80% 60%)`; g.lineWidth = 8;
+      for (const [a, b] of bones) { g.beginPath(); g.moveTo(X(a), Y(a)); g.lineTo(X(b), Y(b)); g.stroke(); }
+    }
+    requestAnimationFrame(draw);
+  })();
+</script>
