@@ -1,0 +1,6 @@
+**/node_modules
+apps/tv
+demo
+.git
+.env
+fixtures/*.json
