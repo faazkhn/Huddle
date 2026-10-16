@@ -1,0 +1,29 @@
+{
+  "name": "huddle",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "services/*",
+    "apps/phone"
+  ],
+  "scripts": {
+    "dev": "npm run build -w apps/phone && npm run dev:relay",
+    "dev:relay": "node --env-file-if-exists=.env services/relay/src/index.ts",
+    "build": "npm run build -w apps/phone",
+    "fixtures": "node tools/make-fixtures.ts",
+    "bots": "node tools/bots.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "avatar": "/Applications/Blender.app/Contents/MacOS/Blender -b -P apps/tv/avatar/make_avatar.py -- apps/tv/src/assets/avatar && cp apps/tv/src/assets/avatar/*.png apps/tv/src/assets/avatar/parts.json apps/phone/public/avatar/"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/ws": "^8.5.12",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
