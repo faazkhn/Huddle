@@ -1,0 +1,22 @@
+{
+  "voice": "en-US-GuyNeural",
+  "rate": "+9%",
+  "pitch": "+2Hz",
+  "scenes": {
+    "cold": "This is Huddle: a motion party game for Fire TV, where the phones in your pocket become the camera.",
+    "problem": "Fire TV is the biggest screen in the house, but it has no camera. So, no motion games, and no coach watching your form. Yet every family already carries two to four cameras: their phones!",
+    "setup1": "Here's how it works. Launch Huddle on Fire TV, and the lobby shows a QR code and a four-letter room code.",
+    "setup2": "Scan it with your phone. A web page opens: no app to install, and no account. Type your name, and tap Join.",
+    "setup3": "Prop the phone up, step back until your whole body is in frame, and you're on the TV! Pose detection runs right on the phone, and only thirty-three skeleton points are sent. Your video never leaves the device.",
+    "setup4": "Up to four players can join, and everyone gets their own character, color, and number. Then the host picks a game with the remote.",
+    "ft1": "First up: Free Throw! Everyone shoots at the same time. The phone tracks your shooting arm through the set, the release, and the follow-through, and scores your form from zero to a hundred.",
+    "ft2": "That score comes from five checks: elbow angle at the set, elbow alignment, knee bend, full extension, and holding the follow-through. Every shot gets an instant tip, and anything over seventy... swish, it's in!",
+    "results": "After five shots, the results screen ranks everyone, and the A.I. coach calls the winner, with one thing to work on. It's written by Amazon Bedrock and voiced by Amazon Polly, with a fallback, so the game never waits.",
+    "bc1": "Next up: Family Boot Camp! Three forty-second rounds of squats, jumping jacks, and high knees, with a ten-second breather and an up-next card in between.",
+    "bc2": "Reps are counted live, and each one needs a full down-and-up, so jitter can't double count. Good form scores ten, partial reps score four. And since everything is measured in angles and body proportions, a nine-year-old can totally beat their dad!",
+    "remote": "Everything works with the Fire TV remote. Back asks before quitting a round, the menu button shows live latency for every player, and if a phone drops out, its slot waits, so rejoining puts you right back in.",
+    "arch": "Under the hood: the Fire TV app is React Native for Vega. Phones run MediaPipe in the browser and score every frame. A small TypeScript relay connects everyone, validates every message, and keeps the AWS keys on the server. Phone to TV is around thirty milliseconds in our tests, and fifty unit tests cover scoring, rooms, and game logic.",
+    "oss": "We also open-sourced the phone-to-TV pose streaming as pose-relay, so any Fire TV app can add motion. Next up: physical therapy at home, youth sports coaching, more sports, and Alexa voice control.",
+    "outro": "Huddle. Your phones are the Fire TV's camera. Let's play!"
+  }
+}
