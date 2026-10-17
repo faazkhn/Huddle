@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Huddle Pitch Deck</title>
+<!-- Render: python3 docs/pitch/render.py  → docs/Huddle-Pitch-Deck.pdf -->
+<style>
+  @page { size: 1920px 1080px; margin: 0; }
+  :root { --bg:#0b1020; --panel:#141b33; --line:#25305a; --ink:#f4f6ff; --mute:#9aa6d1; --hot:#ff7a1a; --cool:#2fd3c5; --gold:#ffd166; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif; }
+  .s { width:1920px; height:1080px; padding:96px 120px; position:relative; overflow:hidden; page-break-after:always; display:flex; flex-direction:column; }
+  .s::after { content: attr(data-n); position:absolute; right:120px; bottom:56px; color:var(--mute); font-size:22px; letter-spacing:2px; }
+  .s::before { content:"HUDDLE"; position:absolute; left:120px; bottom:56px; color:var(--mute); font-size:22px; letter-spacing:6px; font-weight:700; }
+  .kick { color:var(--hot); font-size:26px; font-weight:700; letter-spacing:5px; text-transform:uppercase; margin-bottom:24px; }
+  h1 { font-size:96px; line-height:1.02; font-weight:800; letter-spacing:-2px; }
+  h2 { font-size:68px; line-height:1.08; font-weight:800; letter-spacing:-1px; margin-bottom:48px; }
+  h3 { font-size:34px; font-weight:700; margin-bottom:14px; }
+  p, li { font-size:30px; line-height:1.45; color:#d6dcf5; }
+  ul { padding-left:34px; } li { margin-bottom:14px; }
+  b, .hot { color:var(--ink); } .hot { color:var(--hot); } .cool { color:var(--cool); }
+  .grid { display:grid; gap:36px; flex:1; }
+  .g2 { grid-template-columns:1fr 1fr; } .g3 { grid-template-columns:repeat(3,1fr); } .g4 { grid-template-columns:repeat(4,1fr); }
+  .card { background:var(--panel); border:2px solid var(--line); border-radius:28px; padding:40px; }
+  .card p, .card li { font-size:27px; }
+  .big { font-size:120px; font-weight:800; color:var(--hot); line-height:1; margin-bottom:12px; }
+  .shot { width:100%; border-radius:20px; border:2px solid var(--line); display:block; }
+  .cap { font-size:24px; color:var(--mute); margin-top:14px; }
+  .pill { display:inline-block; padding:12px 26px; border-radius:999px; border:2px solid var(--line); font-size:26px; margin:0 14px 14px 0; color:var(--ink); }
+  .pill.on { background:var(--hot); border-color:var(--hot); color:#111; font-weight:700; }
+  .flow { display:flex; align-items:stretch; gap:22px; margin-top:12px; }
+  .node { flex:1; background:var(--panel); border:2px solid var(--line); border-radius:24px; padding:32px; }
+  .node h3 { font-size:32px; } .node p { font-size:24px; }
+  .arr { display:flex; align-items:center; color:var(--cool); font-size:56px; }
+  table { border-collapse:collapse; width:100%; } td, th { font-size:26px; text-align:left; padding:16px 18px; border-bottom:2px solid var(--line); color:#d6dcf5; vertical-align:top; }
+  th { color:var(--mute); font-weight:600; letter-spacing:2px; text-transform:uppercase; font-size:20px; }
+  .glow { position:absolute; width:900px; height:900px; border-radius:50%; background:radial-gradient(circle, rgba(255,122,26,.28), transparent 65%); right:-200px; top:-200px; }
+</style>
+</head>
+<body>
+
+<section class="s" data-n="01" style="justify-content:center">
+  <div class="glow"></div>
+  <div class="kick">Amazon Developer Hackathon 2026 · Fire TV track</div>
+  <h1>Huddle<br><span class="hot">Your phones are the<br>Fire TV's camera.</span></h1>
+  <p style="font-size:38px;margin-top:40px;max-width:1300px">A living-room sports &amp; fitness party game for Fire TV (Vega OS). Up to four players, no extra hardware, and no video ever leaves the phone.</p>
+  <div style="margin-top:56px"><span class="pill on">Fire TV · primary</span><span class="pill">AWS Builder · Bedrock + Polly</span><span class="pill">Open Source · pose-relay</span></div>
+</section>
+
+<section class="s" data-n="02">
+  <div class="kick">The problem</div>
+  <h2>The biggest screen in the house<br>can't see you.</h2>
+  <div class="grid g3">
+    <div class="card"><h3>No camera</h3><p>Fire TV has no camera, so motion games, fitness form feedback and sports coaching are off the table.</p></div>
+    <div class="card"><h3>Hardware tax</h3><p>Today's options are Kinect-style cameras, smart mirrors or $300+ fitness devices, all extra kit for one room.</p></div>
+    <div class="card"><h3>Tiny screens</h3><p>Phone fitness apps are single-player and live on a 6-inch screen, which doesn't work for family game night.</p></div>
+  </div>
+</section>
+
+<section class="s" data-n="03">
+  <div class="kick">The insight</div>
+  <h2>Every household already owns<br><span class="hot">2–4 cameras.</span> They're in your pockets.</h2>
+  <div class="grid g3">
+    <div class="card"><div class="big">1</div><h3>Scan the QR</h3><p>Each player scans the code on the TV. It opens a web page, so there's no app install and no account.</p></div>
+    <div class="card"><div class="big">2</div><h3>Prop the phone</h3><p>MediaPipe Pose runs <b>on the phone</b> and tracks 33 body points in real time.</p></div>
+    <div class="card"><div class="big">3</div><h3>Play on the TV</h3><p>Only keypoints stream to the TV at 15 fps. The TV is the shared arena, with live scoring and an AI coach.</p></div>
+  </div>
+</section>
+
+<section class="s" data-n="04">
+  <div class="kick">The product</div>
+  <h2>Two games, built for the 10-foot screen</h2>
+  <div class="grid g3" style="flex:0">
+    <div><img class="shot" src="../img/lobby.png"><div class="cap">Lobby: QR join, up to 4 players, D-pad menu</div></div>
+    <div><img class="shot" src="../img/free-throw.png"><div class="cap">Free Throw Form: each shot scored 0–100</div></div>
+    <div><img class="shot" src="../img/boot-camp.png"><div class="cap">Family Boot Camp: rep counting, good / partial</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:40px">
+    <div class="card"><h3 class="hot">Free Throw Form</h3><p>Mime a free throw. Each shot is scored on elbow set angle, elbow alignment, knee bend, arm extension and follow-through, with a tip like <i>"Elbow in!"</i></p></div>
+    <div class="card"><h3 class="cool">Family Boot Camp</h3><p>Squats → jumping jacks → high knees, 40 s each. Every threshold is an angle or a body-relative ratio, so a 9-year-old can fairly beat their dad.</p></div>
+  </div>
+</section>
+
+<section class="s" data-n="05">
+  <div class="kick">Tech implementation</div>
+  <h2>How it works</h2>
+  <div class="flow">
+    <div class="node"><h3>📱 Phone page</h3><p>getUserMedia + MediaPipe PoseLandmarker (WASM/GPU, CPU fallback). EMA smoothing, calibration, <b>scoring at full frame rate</b>.</p></div>
+    <div class="arr">→</div>
+    <div class="node"><h3>☁️ Relay (Node/TS)</h3><p>Rooms, QR codes, zod validation, 16 KB caps, 40 msg/s rate limits. Built on the open-source <b>pose-relay</b> library.</p></div>
+    <div class="arr">→</div>
+    <div class="node"><h3>📺 Fire TV app</h3><p>React Native for Vega 0.83. Authority for rounds, timers and totals. D-pad focus, Back/Menu keys, W3C Media audio.</p></div>
+  </div>
+  <div class="flow" style="margin-top:22px">
+    <div class="node" style="flex:2"><h3 class="cool">AI coach in the relay</h3><p>Round summary (numbers only) → <b>Amazon Bedrock</b> (Claude via Converse) → ≤ 40-word commentator line → <b>Amazon Polly</b> neural MP3 → TV. AWS credentials never reach a client.</p></div>
+    <div class="node"><h3 class="gold" style="color:var(--gold)">Verified</h3><p>50 unit tests (protocol, scoring, rep counters, rig, rooms, TV logic) and strict TypeScript across the monorepo. Runs on the Vega Virtual Device.</p></div>
+  </div>
+</section>
+
+<section class="s" data-n="06">
+  <div class="kick">Design</div>
+  <h2>Designed for the couch, not the desk</h2>
+  <div class="grid g2" style="flex:0">
+    <div class="card"><ul>
+      <li><b>Remote-first:</b> everything works with D-pad + Select; Back quits a round (with confirm); Menu shows a latency overlay.</li>
+      <li><b>10-foot UI:</b> layout authored at 1920×1080 with safe-area margins, high contrast and large focus rings.</li>
+      <li><b>Fair for all ages:</b> body-relative thresholds, not pixels or heights.</li>
+      <li><b>Never silent:</b> if the coach is slow (&gt; 4 s budget), a template caption shows instead.</li>
+    </ul></div>
+    <div class="card"><h3>Players get characters, not skeletons</h3><p>Four stylized 3D characters modeled in <b>Blender</b>, rendered as shaded body-part sprites and driven by a cutout rig from the 33 landmarks every frame. They run in real time on Vega with plain <code>Image</code> views.</p></div>
+  </div>
+  <img class="shot" src="../img/avatar-rig.png" style="margin-top:32px;height:210px;width:auto;align-self:center">
+</section>
+
+<section class="s" data-n="07">
+  <div class="kick">AWS Builder mini challenge</div>
+  <h2>An AI coach that knows your form</h2>
+  <table>
+    <tr><th style="width:26%">Service</th><th>How Huddle uses it</th></tr>
+    <tr><td><b>Amazon Bedrock</b><br>Converse API</td><td>After each round the relay sends scores, ranks and the best and weakest form component (numbers and sanitized names only). Claude returns a family-friendly line that names the winner and gives one concrete tip.</td></tr>
+    <tr><td><b>Amazon Polly</b><br>neural, MP3</td><td>Voices the coach line, which the TV plays through the Vega W3C Media <code>AudioPlayer</code> with a caption. Boot Camp callouts are synthesized once at startup.</td></tr>
+    <tr><td><b>EC2 / Lightsail</b></td><td>Hosts the relay container behind Caddy TLS. App Runner was ruled out because it lacks WebSocket support (logged in our friction log).</td></tr>
+    <tr><td><b>IAM</b></td><td>Least privilege: only <code>bedrock:InvokeModel</code> and <code>polly:SynthesizeSpeech</code>.</td></tr>
+  </table>
+</section>
+
+<section class="s" data-n="08">
+  <div class="kick">Privacy &amp; safety</div>
+  <h2>Cameras in the living room,<br><span class="cool">zero video in the cloud.</span></h2>
+  <div class="grid g4">
+    <div class="card"><div class="big" style="color:var(--cool)">0</div><p>frames of video or images leave the phone. Only 33 × (x, y, visibility) numbers do.</p></div>
+    <div class="card"><div class="big" style="color:var(--cool)">0</div><p>accounts. Names live in memory for the room's lifetime only.</p></div>
+    <div class="card"><div class="big" style="color:var(--cool)">4</div><p>outbound phone message types (<code>join</code>, <code>pose</code>, <code>event</code>, <code>ping</code>). The relay drops everything else.</p></div>
+    <div class="card"><div class="big" style="color:var(--cool)">16 KB</div><p>message cap, 40 msg/s rate limit and zod validation on every inbound message.</p></div>
+  </div>
+</section>
+
+<section class="s" data-n="09">
+  <div class="kick">Potential impact</div>
+  <h2>Who it's for, and where it goes</h2>
+  <div class="grid g2">
+    <div class="card"><h3>Audiences today</h3><ul>
+      <li><b>Families on game night</b> (parents + kids 8+): an active game everyone plays at once.</li>
+      <li><b>Home fitness users</b>: form feedback and motivation without buying hardware.</li>
+      <li><b>Young basketball players</b>: objective shooting-form practice.</li>
+    </ul><p style="margin-top:18px">It works on any Fire TV on Vega OS, using phones people already own.</p></div>
+    <div class="card"><h3>Roadmap</h3><ul>
+      <li><b>Physical therapy</b> with clinician-defined exercises and range-of-motion tracking</li>
+      <li><b>More sports:</b> golf swing, tennis serve, penalties, boxing combos</li>
+      <li><b>Alexa+:</b> <i>"Alexa, start Boot Camp on Huddle"</i></li>
+      <li><b>Watch-along:</b> free-throw challenges during live NBA timeouts</li>
+      <li>Remote multiplayer between two households' Fire TVs</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="s" data-n="10">
+  <div class="kick">Open Source mini challenge</div>
+  <h2><span class="hot">pose-relay</span>: phones as body-pose<br>cameras for any big screen</h2>
+  <div class="grid g3">
+    <div class="card"><h3>Server</h3><p>Transport-agnostic room manager: 4-letter codes, session-token rejoin, heartbeats, rate limits, pluggable validation. About 170 lines with no dependencies.</p></div>
+    <div class="card"><h3>Phone client</h3><p>getUserMedia + MediaPipe PoseLandmarker (GPU → CPU fallback) produces mirrored, aspect-corrected keypoints ready for angle math.</p></div>
+    <div class="card"><h3>Why it matters</h3><p>Any Fire TV, React Native or web big-screen app can add private multi-player motion sensing in an afternoon. MIT licensed, with a minimal example. Huddle is built on it.</p></div>
+  </div>
+</section>
+
+<section class="s" data-n="11">
+  <div class="kick">Building on Vega</div>
+  <h2>What we learned, and what we'd ask for</h2>
+  <div class="grid g2">
+    <div class="card"><h3>Worked well</h3><ul>
+      <li>About 10 minutes from zero to hello-world on the Vega Virtual Device</li>
+      <li>It's just React Native: shared TS packages bundle through Metro</li>
+      <li>D-pad focus with no custom code; WebSocket, SVG and audio all available</li>
+    </ul><p class="cap" style="font-size:26px">11 friction-log entries with severity, workaround and suggestion: see FRICTION_LOG.md</p></div>
+    <div class="card"><h3>Feature requests</h3><ul>
+      <li><b>Companion-device API</b> with system QR pairing <span class="hot">(important)</span></li>
+      <li><b>Local WebSocket server</b> + LAN discovery in Vega apps <span class="hot">(important)</span></li>
+      <li>VVD logical resolution aligned with real devices <span class="hot">(important)</span></li>
+      <li><code>vega device key</code> / <code>screenrecord</code> (nice-to-have)</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="s" data-n="12" style="justify-content:center">
+  <div class="glow"></div>
+  <div class="kick">Huddle</div>
+  <h1>Turn the living room<br>into the <span class="hot">arena.</span></h1>
+  <p style="font-size:34px;margin-top:48px">Code: <b>github.com/faazkhn/Huddle</b> · MIT licensed</p>
+  <p style="font-size:34px">Library: <b>github.com/faazkhn/Huddle/tree/main/packages/pose-relay</b></p>
+  <p style="font-size:26px;margin-top:40px;color:var(--mute);max-width:1500px">Status: runs end-to-end on the Vega Virtual Device with simulated players and a <code>?sim=1</code> phone page. The live Bedrock + Polly path is implemented but was not run during the build, which had no AWS credentials; the caption fallback was verified.</p>
+</section>
+
+</body>
+</html>
