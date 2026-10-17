@@ -11,7 +11,7 @@ Tracks: **Fire TV** (primary) · **AWS Builder** (Bedrock + Polly coach) · **Op
 |---|---|---|
 | ![Lobby on the Vega Virtual Device](docs/img/lobby.png) | ![Free Throw round](docs/img/free-throw.png) | ![Boot Camp round](docs/img/boot-camp.png) |
 
-**Demo video:** _YouTube link coming soon_ (2:52; regenerate locally with the steps in [Demo video](#demo-video)).
+**Demo video:** https://youtu.be/hY2PGKhZ_bg (2:52; regenerate locally with the steps in [Demo video](#demo-video)).
 **Pitch deck:** [docs/Huddle-Pitch-Deck.pdf](docs/Huddle-Pitch-Deck.pdf)
 
 ## How it works
